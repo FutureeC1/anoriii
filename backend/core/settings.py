@@ -169,13 +169,13 @@ SIMPLE_JWT = {
 }
 
 # CORS configuration
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
+CORS_ALLOWED_ORIGINS = [origin.rstrip('/') for origin in env.list('CORS_ALLOWED_ORIGINS', default=[
     "http://localhost:5173",
     "http://localhost:3000",
     "http://localhost:80",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:80",
-])
+])]
 
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+CSRF_TRUSTED_ORIGINS = [origin.rstrip('/') for origin in env.list('CSRF_TRUSTED_ORIGINS', default=[])]
