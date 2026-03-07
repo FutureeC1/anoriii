@@ -59,9 +59,7 @@ export function Home() {
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <div className="max-w-2xl">
             <h1 className="text-5xl md:text-7xl tracking-tight mb-6">
-              Элегантность
-              <br />
-              <span className="text-yellow-700">в каждой детали</span>
+              Silver jewelry и <span className="text-yellow-700">серебряные украшения</span> в Ташкенте — Anori
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-lg">
               Минималистичные украшения премиум-класса для ценителей утонченного стиля
@@ -317,6 +315,23 @@ export function Home() {
               alt="Instagram post"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
+          </div>
+        </div>
+      </section>
+      {/* SEO Content Section */}
+      <section className="bg-white py-16 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl mb-6 font-light">Anori Jewelry — ваш гид по стилю в мире серебра</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Anori is a jewelry store selling silver rings, chains and necklaces. Мы предлагаем широкий выбор:
+              <strong> silver jewelry, silver rings, silver necklace, серебряные украшения, серебряные кольца, серебряные цепочки</strong>
+              в Ташкенте с быстрой доставкой по всему Узбекистану.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Наш магазин украшений Anori Tashkent специализируется на минималистичных и трендовых изделиях,
+              которые подчеркнут вашу индивидуальность и добавят утонченности любому образу.
+            </p>
           </div>
         </div>
       </section>
