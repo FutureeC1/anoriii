@@ -178,4 +178,9 @@ CORS_ALLOWED_ORIGINS = [origin.rstrip('/') for origin in env.list('CORS_ALLOWED_
     "http://127.0.0.1:80",
 ])]
 
-CSRF_TRUSTED_ORIGINS = [origin.rstrip('/') for origin in env.list('CSRF_TRUSTED_ORIGINS', default=[])]
+CSRF_TRUSTED_ORIGINS = [origin.rstrip('/') for origin in env.list('CSRF_TRUSTED_ORIGINS', default=[
+    "https://*.koyeb.app"
+])]
+
+# Security settings for production
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
