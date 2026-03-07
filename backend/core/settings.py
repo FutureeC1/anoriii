@@ -28,12 +28,14 @@ env = environ.Env(
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default='django-insecure-q)1mhsoqucds1=ehgz=wu(za-ao2px+@!2n_rx84j8i1hqc2l+')
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-default-key-for-build')
+if not SECRET_KEY:
+    SECRET_KEY = 'django-insecure-fallback-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '.koyeb.app'])
 
 
 # Application definition
