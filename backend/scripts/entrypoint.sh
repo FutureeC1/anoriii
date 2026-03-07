@@ -23,5 +23,5 @@ if not User.objects.filter(username="$ADMIN_USER").exists():
 EOF
 fi
 
-echo "Starting server..."
-exec gunicorn core.wsgi:application --bind 0.0.0.0:8000
+echo "Starting server on port ${PORT:-8000}..."
+exec gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-8000}
