@@ -1,0 +1,36 @@
+from django.contrib import admin
+from .models import Category, Product, ProductImage, ProductSize
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+class ProductSizeInline(admin.TabularInline):
+    model = ProductSize
+    extra = 1
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name_uz', 'slug', 'created_at')
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('name', 'name_uz')
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'price', 'is_active', 'is_new', 'rating', 'stock_quantity')
+    list_filter = ('category', 'is_active', 'is_new')
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('name', 'name_uz', 'description')
+    inlines = [ProductImageInline, ProductSizeInline]
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'name_uz', 'slug', 'description', 'price', 'category')
+        }),
+        ('Status', {
+            'fields': ('is_active', 'is_new', 'stock_quantity', 'rating', 'reviews_count')
+        }),
+        ('Extra', {
+            'fields': ('characteristics',),
+            'classes': ('collapse',)
+        }),
+    )

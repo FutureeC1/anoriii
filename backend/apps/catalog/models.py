@@ -1,0 +1,65 @@
+from django.db import models
+from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    name_uz = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    name_uz = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=12, decimal_places=0) # Using 0 decimal places for UZS
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.PROTECT)
+    is_active = models.BooleanField(default=True)
+    is_new = models.BooleanField(default=False)
+    rating = models.FloatField(default=0.0)
+    reviews_count = models.IntegerField(default=0)
+    stock_quantity = models.IntegerField(default=0)
+    characteristics = models.JSONField(default=dict, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        if self.price < 0:
+            raise ValidationError("Price cannot be negative")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
+    image_url = models.URLField(max_length=1000)
+    alt = models.CharField(max_length=255, blank=True)
+    sort_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['sort_order']
+
+class ProductSize(models.Model):
+    product = models.ForeignKey(Product, related_name='sizes', on_delete=models.CASCADE)
+    size = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.size}"
