@@ -23,13 +23,11 @@ if not SECRET_KEY:
 DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
-    'localhost', 
-    '127.0.0.1', 
     'presidential-marylynne-baveehub-f2fad4d9.koyeb.app',
-    '.koyeb.app',
     'anori.uz',
     'www.anori.uz',
-    'anoriii.pages.dev'
+    'localhost',
+    '127.0.0.1'
 ])
 
 
@@ -54,8 +52,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    "django.middleware.common.CommonMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -164,22 +162,17 @@ SIMPLE_JWT = {
 }
 
 # CORS configuration
-CORS_ALLOWED_ORIGINS = [origin.rstrip('/') for origin in env.list('CORS_ALLOWED_ORIGINS', default=[
+CORS_ALLOWED_ORIGINS = [
     "https://anori.uz",
-    "https://www.anori.uz",
-    "https://anoriii.pages.dev",
-    "http://localhost:5173",
-    "http://localhost:3000",
-])]
+    "https://www.anori.uz"
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = [origin.rstrip('/') for origin in env.list('CSRF_TRUSTED_ORIGINS', default=[
+CSRF_TRUSTED_ORIGINS = [
     "https://anori.uz",
-    "https://www.anori.uz",
-    "https://anoriii.pages.dev",
-    "https://*.koyeb.app"
-])]
+    "https://www.anori.uz"
+]
 
 # Security settings for production
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
