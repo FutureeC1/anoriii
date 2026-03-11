@@ -54,7 +54,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-3 text-sm text-gray-600">
                 <Phone className="w-4 h-4" />
-                <span>+998 90 123 45 67</span>
+                <span>+998 88 688 67 77</span>
               </li>
               <li className="flex items-center space-x-3 text-sm text-gray-600">
                 <Mail className="w-4 h-4" />
@@ -62,7 +62,7 @@ export function Footer() {
               </li>
               <li className="flex items-start space-x-3 text-sm text-gray-600">
                 <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span>г. Ташкент, ул. Мустакиллик, 1</span>
+                <span>г. Ташкент, Узбекистон Овози 35</span>
               </li>
             </ul>
           </div>

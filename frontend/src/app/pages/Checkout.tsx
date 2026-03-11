@@ -114,7 +114,7 @@ export function Checkout() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-700 focus:border-transparent"
-                    placeholder="+998 90 123 45 67"
+                    placeholder="+998 88 688 67 77"
                   />
                 </div>
               </div>
