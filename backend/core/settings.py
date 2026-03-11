@@ -28,7 +28,8 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
     'presidential-marylynne-baveehub-f2fad4d9.koyeb.app',
     '.koyeb.app',
     'anori.uz',
-    'www.anori.uz'
+    'www.anori.uz',
+    'anoriii.pages.dev'
 ])
 
 
