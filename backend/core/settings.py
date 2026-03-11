@@ -86,15 +86,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+from django.core.exceptions import ImproperlyConfigured
+
 DATABASE_URL = os.getenv("DATABASE_URL")
-
 if not DATABASE_URL:
-    try:
-        DATABASE_URL = env("DATABASE_URL", default=None)
-    except Exception:
-        DATABASE_URL = None
+    DATABASE_URL = env("DATABASE_URL", default=None)
 
-if not DATABASE_URL:
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,
+        )
+    }
+else:
     if DEBUG:
         DATABASES = {
             "default": {
@@ -103,16 +109,7 @@ if not DATABASE_URL:
             }
         }
     else:
-        from django.core.exceptions import ImproperlyConfigured
         raise ImproperlyConfigured("DATABASE_URL must be set in production (DEBUG=False)")
-else:
-    DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
 
 
 # Password validation
