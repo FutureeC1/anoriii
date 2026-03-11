@@ -86,7 +86,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASE_URL = os.getenv("DATABASE_URL") or env("DATABASE_URL", default=None)
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    try:
+        DATABASE_URL = env("DATABASE_URL", default=None)
+    except Exception:
+        DATABASE_URL = None
 
 if not DATABASE_URL:
     if DEBUG:
