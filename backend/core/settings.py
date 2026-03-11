@@ -86,9 +86,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+DATABASE_URL = env('DATABASE_URL', default=None)
+
+if not DATABASE_URL:
+    if DEBUG:
+        DATABASE_URL = f"sqlite:///{BASE_DIR}/db.sqlite3"
+    else:
+        from django.core.exceptions import ImproperlyConfigured
+        raise ImproperlyConfigured("DATABASE_URL must be set in production (DEBUG=False)")
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=env('DATABASE_URL', default=f"sqlite:///{BASE_DIR}/db.sqlite3"),
+        default=DATABASE_URL,
         conn_max_age=600,
     )
 }
