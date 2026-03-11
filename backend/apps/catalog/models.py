@@ -40,7 +40,6 @@ class Product(models.Model):
             raise ValidationError("Price cannot be negative")
 
     def save(self, *args, **kwargs):
-        self.full_clean()
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
@@ -62,4 +61,6 @@ class ProductSize(models.Model):
     size = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"{self.product.name} - {self.size}"
+        if self.product_id:
+            return f"{self.product.name} - {self.size}"
+        return f"New Size - {self.size}"

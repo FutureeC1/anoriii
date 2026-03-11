@@ -3,19 +3,6 @@ from pathlib import Path
 from datetime import timedelta
 import environ
 import dj_database_url
-import django.template.context
-
-# --- Python 3.14 Compatibility Patch ---
-# Fixed AttributeError: 'super' object has no attribute 'dicts' 
-# in Django 5.0 on Python 3.14
-def patched_base_context_copy(self):
-    duplicate = self.__class__.__new__(self.__class__)
-    duplicate.__dict__.update(self.__dict__)
-    duplicate.dicts = self.dicts[:]
-    return duplicate
-
-django.template.context.BaseContext.__copy__ = patched_base_context_copy
-# ---------------------------------------
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
