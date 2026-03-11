@@ -35,7 +35,14 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
+    'localhost', 
+    '127.0.0.1', 
+    'presidential-marylynne-baveehub-f2fad4d9.koyeb.app',
+    '.koyeb.app',
+    'anori.uz',
+    'www.anori.uz'
+])
 
 
 # Application definition
@@ -170,15 +177,19 @@ SIMPLE_JWT = {
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = [origin.rstrip('/') for origin in env.list('CORS_ALLOWED_ORIGINS', default=[
+    "https://anori.uz",
+    "https://www.anori.uz",
+    "https://anoriii.pages.dev",
     "http://localhost:5173",
     "http://localhost:3000",
-    "http://localhost:80",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:80",
 ])]
 
+CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = [origin.rstrip('/') for origin in env.list('CSRF_TRUSTED_ORIGINS', default=[
+    "https://anori.uz",
+    "https://www.anori.uz",
+    "https://anoriii.pages.dev",
     "https://*.koyeb.app"
 ])]
 
